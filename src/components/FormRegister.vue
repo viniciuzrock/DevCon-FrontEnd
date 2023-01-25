@@ -1,7 +1,8 @@
 <template>
     <div class="form-register">
         <div class="optionsContainer">
-            Logomarca
+            <!-- Logomarca -->
+            <Message :msgData="msgData" :classMessage="classMessage"/>
         </div>
         <div class="form-container">
             <form id="user-form" @submit="register($event)">
@@ -36,44 +37,62 @@
 
 </template>
 <script>
+    import Message from './Message.vue';
     export default{
-        name:"FormRegister",
-        props:["user"],
-        data(){
-            return{ //null => Qnd for reusar o form para edição, já trazer os dados do usuario
+        components: {
+            Message
+        },
+        name: "FormRegister",
+        props: ["user"],
+        data() {
+            return {
                 formName: this.user.name || null,
                 formEmail: this.user.email || null,
                 formPassword: this.user.password || null,
                 formConfirmPassword: this.user.confirmPassword || null,
-            }
+                msgData: null,
+                classMessage: null
+            };
         },
-        methods:{
-            async register(e){
-                e.preventDefault()
-
+        methods: {
+            async register(e) {
+                e.preventDefault();
                 const formData = {
                     name: this.name,
                     email: this.email,
                     password: this.password,
                     confirmPassword: this.confirmPassword
-                }
+                };
                 console.log(formData);
-                const jsonData = JSON.stringify(formData)
-
-                await fetch("http://localhost:8080/users/register",{
-                    method:"POST",
-                    headers:{
-                        "Content-type":"application/json"
+                const jsonData = JSON.stringify(formData);
+                await fetch("http://localhost:8080/users/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json"
                     },
                     body: jsonData
-                }).then((resp)=> resp.json()).then((data)=>{
+                }).then((resp) => resp.json()).then((data) => {
                     console.log(data);
-                }).catch((err)=>{
-                    console.log(err);
-                })
-            }
-        }
+                    let auth = false;
+                    if (data.error) {
+                        this.msgData = data.error
+                        this.classMessage = "error"
+                    } else {
+                        let auth = true
+                        this.msgData = data.msg
+                        this.classMessage = "success"
+                    }
 
+                    // CRIAR FUNCAO PARA AUTENTICAR
+
+                    setTimeout(()=>{
+                        this.msgData = null
+                    }, 2000)
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        },
     }
 </script>
 
@@ -84,7 +103,7 @@
     }
     .form-container{
         max-width: 550px;
-        margin: auto;
+        margin: 0px auto;
     }
     #user-form{
         width: 100%;
