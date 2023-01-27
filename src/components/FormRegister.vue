@@ -1,8 +1,14 @@
 <template>
     <div class="form-register">
         <div class="optionsContainer">
-            <!-- Logomarca -->
-            <Message :msgData="msgData" :classMessage="classMessage"/>
+            <div class="msgField">
+                <Message :msgData="msgData" :classMessage="classMessage"/>
+            </div>
+            <div class="loginField">
+                    <router-link to="/login">
+                        Login
+                    </router-link>
+            </div>
         </div>
         <div class="form-container">
             <form id="user-form" @submit="register($event)">
@@ -63,16 +69,15 @@
                     password: this.password,
                     confirmPassword: this.confirmPassword
                 };
-                console.log(formData);
+
                 const jsonData = JSON.stringify(formData);
-                await fetch("http://localhost:8080/users/register", {
+                await fetch("http://localhost:8080/auth/register", {
                     method: "POST",
                     headers: {
                         "Content-type": "application/json"
                     },
                     body: jsonData
                 }).then((resp) => resp.json()).then((data) => {
-                    console.log(data);
                     let auth = false;
                     if (data.error) {
                         this.msgData = data.error
@@ -83,10 +88,17 @@
                         this.classMessage = "success"
                     }
 
-                    // CRIAR FUNCAO PARA AUTENTICAR
+                    this.$store.commit("authenticate",{
+                        token:data.token,
+                        userId:data.userId
+                    })
 
                     setTimeout(()=>{
                         this.msgData = null
+
+                        if(!data.error){
+                            this.$router.push('home')
+                        }
                     }, 2000)
                 }).catch((err) => {
                     console.log(err);
@@ -97,9 +109,12 @@
 </script>
 
 <style scoped>
+    *{
+        color: #162434;
+    }
     .form-register{
-        margin: auto;
-        border-radius: 30;
+        margin: 0 auto;
+        border-radius: 30px;
     }
     .form-container{
         max-width: 550px;
@@ -138,6 +153,7 @@
         height: 40px;
         border-radius: 10px;
         margin: 1px;
+        cursor: pointer;
     }
     #cancel{
         color: #6A27D7;
@@ -148,5 +164,38 @@
         background-color: #6A27D7;
         color: #fff;
         border: #fff;
+    }
+    .optionsContainer{
+        /* background-color: red; */
+        padding-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .msgField{
+        width: 80%;
+        height: 40px;
+        display: flex;
+        flex-direction: row;
+        padding-left: 20%;
+        justify-content: center;
+        /* background-color: red; */
+    }
+
+    .loginField{
+        width: 7em;
+        height: 40px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+        font-weight: 600;
+        border: solid #162434;
+    }
+    .loginField a{
+        text-decoration: none;
     }
 </style>
