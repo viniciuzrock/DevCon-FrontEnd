@@ -10,7 +10,7 @@ export default createStore({
         return{
             authenticated: false,
             token: null,
-            userId: null
+            userId: null,
         }
     },
     mutations:{
@@ -19,5 +19,12 @@ export default createStore({
             state.token = data.token,
             state.userId = data.userId
         }
-    }
+    },
+    getters:{
+        authenticated: state => state.authenticated,
+        token: state => state.token,
+        userId: state => state.userId
+    },
+    plugins:[vuexLocal.plugin]
+
 })
