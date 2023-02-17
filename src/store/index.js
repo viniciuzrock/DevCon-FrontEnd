@@ -18,6 +18,11 @@ export default createStore({
             state.authenticated = true,
             state.token = data.token,
             state.userId = data.userId
+        },
+        logout(state){
+            state.authenticated = false,
+            state.token = null,
+            state.userId = null
         }
     },
     getters:{

@@ -1,13 +1,15 @@
 <template>
     <div class="form-register">
-        <div class="optionsContainer">
+        <div class="form-header">
             <div class="msgField">
                 <Message :msgData="msgData" :classMessage="classMessage"/>
             </div>
-            <div class="loginField">
+            <div class="loginButton">
+                <button>
                     <router-link to="/login">
-                        Login
+                        Entrar
                     </router-link>
+                </button>
             </div>
         </div>
         <div class="form-container">
@@ -29,9 +31,6 @@
                     <input type="password" name="confirmPassword" class="confirmPassword" v-model="confirmPassword" placeholder="******">
                 </div>
                 <div class="action-container">
-                    <button type="submit" id="cancel">
-                        Cancelar
-                    </button>
                     <button type="submit" id="register">
                         Cadastrar
                     </button>
@@ -112,24 +111,66 @@
     *{
         color: #162434;
     }
+
     .form-register{
-        margin: 0 auto;
-        border-radius: 30px;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 1rem;
+        position: relative;
+    }
+    .form-header{
+        display: flex;
+        justify-content:end;
+        margin-bottom: 3rem;
+        width: 100%;
+    }
+    .msgField{
+        width: 80%;
+        height: 40px;
+        display: flex;
+        flex-direction: row;
+        padding-left: 20%;
+        z-index: 1;
+        position: absolute;
+        /* transform: translateX(-30%); */
+        top: 3%;
+        right: 40%;
+    }
+
+    .loginButton{
+        display: flex;
+        justify-content:end;
+        font-weight: 600;
+    }
+    .loginButton button{
+        border: none;
+        background-color: #6A27D7;
+        padding: 0.4rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+
+    }
+    .loginButton button a{
+        text-decoration: none;
+        font-weight: 500;
+        color: #fff;
     }
     .form-container{
-        max-width: 550px;
-        margin: 0px auto;
+        /* max-width: 650px; */
+        margin: 0px 20%;
     }
     #user-form{
-        width: 100%;
-        padding: 2rem 8rem;
-        align-items: center;
+        /* width: 100%; */
+        /* padding: 2rem 8rem; */
+        /* align-items: center; */
     }
     .input-container{
         display: flex;
         flex-direction: column;
         margin-bottom: 1.5rem;
-
+        width: 100%;
     }
     .input-container label{
         text-align: start;
@@ -145,57 +186,22 @@
         color: #000000;
     }
     .action-container{
-        display: flex;
-        justify-content:space-between;
+        /* display: flex; */
+        /* justify-content:space-between; */
     }
     .action-container button{
-        width: 11.5em;
-        height: 40px;
+        width: 100%;
+        padding: 0.7rem;
+        border: none;
         border-radius: 10px;
-        margin: 1px;
+        margin-top: 2rem;
         cursor: pointer;
     }
-    #cancel{
-        color: #6A27D7;
-        background-color: #fff;
-        border: solid #6A27D7;
-    }
     #register{
+
         background-color: #6A27D7;
         color: #fff;
         border: #fff;
     }
-    .optionsContainer{
-        /* background-color: red; */
-        padding-top: 10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
-    .msgField{
-        width: 80%;
-        height: 40px;
-        display: flex;
-        flex-direction: row;
-        padding-left: 20%;
-        justify-content: center;
-        /* background-color: red; */
-    }
 
-    .loginField{
-        width: 7em;
-        height: 40px;
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        cursor: pointer;
-        font-weight: 600;
-        border: solid #162434;
-    }
-    .loginField a{
-        text-decoration: none;
-    }
 </style>

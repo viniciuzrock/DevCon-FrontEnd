@@ -17,7 +17,7 @@
                 Olá {{ user }}
             </h4>
             <div>
-                <button>
+                <button @click="logout($event)">
                     Sair
                 </button>
             </div>
@@ -40,27 +40,28 @@
         },
         methods:{
             async getUser(){
-                console.log('AA');
                 const data = {
-                userIdLogin: this.$store.getters.userId
-            }
+                    userIdLogin: this.$store.getters.userId
+                }
 
-            const jsonData = JSON.stringify(data)
+                const jsonData = JSON.stringify(data)
 
-            await fetch("http://localhost:8080/user/getUser",{
-                method:"POST",
-                headers:{
-                    "Content-type":"application/json"
-                },
-                body: jsonData
-            }).then((resp)=> resp.json()).then((data)=>{
-                this.user = data.data.name
-                console.log(data.data.name);
-            }).catch((err)=>{
-                console.log(err);
-            })
-
-            console.log(data)
+                await fetch("http://localhost:8080/user/getUser",{
+                    method:"POST",
+                    headers:{
+                        "Content-type":"application/json"
+                    },
+                    body: jsonData
+                }).then((resp)=> resp.json()).then((data)=>{
+                    this.user = data.data.name
+                }).catch((err)=>{
+                    console.log(err);
+                })
+            },
+            async logout(e){
+                e.preventDefault()
+                this.$store.commit('logout')
+                this.$router.push('/login')
             }
         }
 
@@ -99,6 +100,23 @@
     .userLogout{
         display: flex;
         flex-direction: row;
+        align-items: center;
         justify-content: space-around;
+        width: 200px;
+    }
+    .userLogout button{
+        padding: 5px;
+        background-color: red;
+        width: 50px;
+        border-radius: 10px;
+        height: 40px;
+        cursor: pointer;
+        transition: .5s;
+    }
+    .userLogout button:hover{
+        background-color: #fff;
+        border: solid 3px red;
+        color: red;
+        transition: .5s;
     }
 </style>

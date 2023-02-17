@@ -1,10 +1,7 @@
 <template>
     <div class="slider-register">
         <div class="img-container">
-
         </div>
-        <p>Slider de Fotos</p>
-        <!-- <img src="../../public/img" alt=""> -->
     </div>
 
 </template>
@@ -16,28 +13,17 @@
 
 <style scoped>
     .slider-register{
-        /* background-color: #162434; */
-
         width: 50%;
-        color: #fff;
-        border-radius: 30px;
-        text-align: center;
-        align-items: center;
+        display: flex;
         justify-content: center;
+        align-items: center;
     }
     .img-container{
-        max-width: 100%;
-        height: 79.5vh;
-        background-image:url('./icons/ales-nesetril-Im7lZjxeLhg-unsplash.jpg');
-        border-radius: 30px;
+        width: 62rem;
+        height: 80vh;
+        background-image:url('../../public/img/register-img.jpg');
         background-size: cover;
         background-position: center;
     }
-    .slider-register p{
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-    }
-
 
 </style>

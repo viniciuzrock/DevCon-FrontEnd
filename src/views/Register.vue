@@ -16,13 +16,12 @@ import SliderRegister from '../components/SliderRegister.vue'
 
 <style scoped>
     .container-register{
-        border: solid 3px #000;
-        max-height: 80vh;
-        max-width: 160vh;
-        margin: 4rem auto;
-        text-align: center;
+        height: 80vh;
+        width: 100%;
         display: flex;
-        border-radius: 35px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, .212);
+        /* justify-content: center;
+        align-items: center; */
     }
 
 </style>

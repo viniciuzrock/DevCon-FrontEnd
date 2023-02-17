@@ -106,7 +106,8 @@
         border: solid 3px #000;
         max-height: 80vh;
         max-width: 60vh;
-        margin: 4rem auto;
+        margin:  auto;
+        margin: 7em auto;
         text-align: center;
         display: flex;
         border-radius: 35px;
@@ -114,6 +115,7 @@
     .form-login{
         margin: 0 auto;
         border-radius: 30px;
+        padding: 10px;
     }
     .form-container{
         max-width: 550px;
