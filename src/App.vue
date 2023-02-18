@@ -1,7 +1,3 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
   <header>
     <!-- <div class="wrapper">
@@ -12,9 +8,12 @@ import { RouterLink, RouterView } from 'vue-router'
       </nav>
     </div> -->
   </header>
-
   <RouterView/>
 </template>
+
+<script>
+  import { RouterLink, RouterView } from 'vue-router'
+</script>
 
 <style >
 
@@ -25,10 +24,14 @@ import { RouterLink, RouterView } from 'vue-router'
     font-family: inter;
   }
   body{
-    width: 100%;
+    /* width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #a8c0ff;
+background: -webkit-linear-gradient(to right, #3f2b96, #a8c0ff);
+background: linear-gradient(to right, #3f2b96, #a8c0ff);
+ */
   }
 </style>

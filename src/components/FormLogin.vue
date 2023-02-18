@@ -1,7 +1,11 @@
 <template>
-    <div class="login-container">
-        <div class="form-login">
+    <div class="container">
+
+        <div class="login-container">
             <div class="optionslogin">
+                <div>
+                    <!-- <img src="../../public/img/logo2.png" alt=""> -->
+                </div>
                 <div class="msgField">
                     <Message :msgData="msgData" :classMessage="classMessage"/>
                 </div>
@@ -17,14 +21,15 @@
                         <input type="password" name="password" class="password" v-model="password" placeholder="******">
                     </div>
                     <div class="action-container">
-                        <router-link to="/register">
-                                <button type="submit" id="cancel">
-                                    Cadastre-se
-                                </button>
-                            </router-link>
                         <button type="submit" id="register">
-                            Entrar
+                                <div v-if="request">
+                                    <spinner-load/>
+                                </div>
+                                <div>
+                                    Entrar
+                                </div>
                         </button>
+                        <p>Não possui uma conta? <router-link to="/register">Cadastre-se</router-link></p>
                     </div>
 
                 </form>
@@ -36,24 +41,27 @@
 <script>
     import Message from '../components/Message.vue'
     import SliderRegister from '../components/SliderRegister.vue'
+import SpinnerLoad from './SpinnerLoad.vue'
     export default {
         name:"login",
         components: {
             SliderRegister,
-                Message
+                Message,
+                SpinnerLoad
         },
         data(){
             return{
                 email: null,
                 password: null,
                 msgData: null,
-                classMessage: null
+                classMessage: null,
+                request:false
             }
         },
         methods:{
             async login(e){
                 e.preventDefault()
-
+                // this.request = true
                 const dataLogin = {
                     email: this.email,
                     password: this.password,
@@ -69,12 +77,14 @@
                     body: jsonData
                 }).then((resp) => resp.json()).then((data)=>{
                     let auth = false
-
+                    this.request = true
                     if(data.error){
                         this.msgData = data.error,
                         this.classMessage = "error"
+                        this.request = false
                     } else {
                         auth = true
+
                         this.msgData = data.msg,
                         this.classMessage = "success"
                         this.$store.commit("authenticate",{
@@ -88,6 +98,7 @@
                             this.msgData = null
                         } else {
                             this.$router.push("home")
+                            this.request = false
                         }
                     }, 2000)
                 }).catch((err)=>{
@@ -102,35 +113,46 @@
     *{
         color: #162434;
     }
-    .login-container{
-        border: solid 3px #000;
-        max-height: 80vh;
-        max-width: 60vh;
-        margin:  auto;
-        margin: 7em auto;
-        text-align: center;
+    .container{
+        width: 100%;
+        height: 100vh;
         display: flex;
-        border-radius: 35px;
+        justify-content: center;
+        align-items: center;
+        background: #a8c0ff;
+        background: -webkit-linear-gradient(to right, #3f2b96, #a8c0ff);
+        background: linear-gradient(to right, #3f2b96, #a8c0ff);
     }
-    .form-login{
+    .login-container{
+        height: 80vh;
+        /* width:36rem; */
+        width:40%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 1rem;
+        position: relative;
+        background-color: #fff;
+    }
+    /* .form-login{
         margin: 0 auto;
         border-radius: 30px;
         padding: 10px;
-    }
+    } */
     .form-container{
-        max-width: 550px;
-        margin: 0px auto;
+        /* max-width: 550px; */
+        margin: 0px 20%;
     }
-    #user-form{
+    /* #user-form{
         width: 100%;
         padding: 2rem;
         align-items: center;
-    }
+    } */
     .input-container{
         display: flex;
         flex-direction: column;
         margin-bottom: 1.5rem;
-
+        width: 100%;
     }
     .input-container label{
         text-align: start;
@@ -147,24 +169,30 @@
     }
     .action-container{
         display: flex;
+        flex-direction: column;
         justify-content:space-between;
     }
+    .action-container button div{
+        color: #fff;
+    }
     .action-container button{
-        width: 11.5em;
+        width: 100%;
+        padding: 0.7rem;
+        margin-top: 2rem;
         height: 40px;
         border-radius: 10px;
-        margin: 1px;
         cursor: pointer;
     }
-    #cancel{
-        color: #6A27D7;
-        background-color: #fff;
-        border: solid #6A27D7;
-    }
-    #register{
+    #register {
         background-color: #6A27D7;
         color: #fff;
         border: #fff;
+        transition: 0.5s;
+        position: relative;
+    }
+    #register:hover{
+        background-color: #4c00ff;
+        transition: 0.5s;
     }
     .optionsContainer{
         /* background-color: red; */
@@ -179,9 +207,10 @@
         height: 40px;
         display: flex;
         flex-direction: row;
-        padding-left: 20%;
+        position: absolute;
         justify-content: center;
-        /* background-color: red; */
+        top: 3%;
+        right: 10%;
     }
 
     .loginField{

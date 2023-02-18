@@ -19,8 +19,11 @@
         align-items: center;
     }
     .img-container{
+        /* width: 62rem; */
         width: 62rem;
         height: 80vh;
+        /* height: 36rem; */
+
         background-image:url('../../public/img/register-img.jpg');
         background-size: cover;
         background-position: center;

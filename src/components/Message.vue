@@ -25,6 +25,7 @@
         justify-content: center;
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
+        transition: 1.5s;
     }
     .msg label{
         justify-content: center;
@@ -32,9 +33,11 @@
     .error{
         background-color: #F8D7DA;
         border-left: 5px solid red;
+        transition: 1.5s;
     }
     .success{
         background-color: #D4EDDA;
         border-left: 5px solid green;
+        transition: 0.5s;
     }
 </style>

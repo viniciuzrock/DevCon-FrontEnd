@@ -32,8 +32,16 @@
                 </div>
                 <div class="action-container">
                     <button type="submit" id="register">
-                        Cadastrar
+                        <div v-if="request">
+                            <spinner-load/>
+                        </div>
+                        <div>
+                            Cadastrar
+                        </div>
                     </button>
+                    <!-- <button class="btn btn-primary input-group-btn loading">
+                        Cadastrar
+                    </button> -->
                 </div>
 
             </form>
@@ -56,12 +64,14 @@
                 formPassword: this.user.password || null,
                 formConfirmPassword: this.user.confirmPassword || null,
                 msgData: null,
-                classMessage: null
+                classMessage: null,
+                request:false
             };
         },
         methods: {
             async register(e) {
                 e.preventDefault();
+                this.request = true
                 const formData = {
                     name: this.name,
                     email: this.email,
@@ -81,6 +91,7 @@
                     if (data.error) {
                         this.msgData = data.error
                         this.classMessage = "error"
+                        this.request = false
                     } else {
                         let auth = true
                         this.msgData = data.msg
@@ -94,7 +105,7 @@
 
                     setTimeout(()=>{
                         this.msgData = null
-
+                        this.request = false
                         if(!data.error){
                             this.$router.push('home')
                         }
@@ -136,7 +147,7 @@
         position: absolute;
         /* transform: translateX(-30%); */
         top: 3%;
-        right: 40%;
+        right: 25%;
     }
 
     .loginButton{
@@ -146,16 +157,24 @@
     }
     .loginButton button{
         border: none;
-        background-color: #6A27D7;
-        padding: 0.4rem 1rem;
         border-radius: 5px;
         cursor: pointer;
 
     }
     .loginButton button a{
+        border: none;
+        background-color: #6A27D7;
+        padding: 0.7rem 1.2rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.5s;
         text-decoration: none;
         font-weight: 500;
         color: #fff;
+    }
+    .loginButton button a:hover{
+        background-color: #4c00ff;
+        transition: 0.5s;
     }
     .form-container{
         /* max-width: 650px; */
@@ -197,11 +216,17 @@
         margin-top: 2rem;
         cursor: pointer;
     }
+    .action-container button div {
+        color: #fff;
+    }
     #register{
-
+        transition: 0.5s;
         background-color: #6A27D7;
         color: #fff;
         border: #fff;
     }
-
+    #register:hover{
+        background-color: #4c00ff;
+        transition: 0.5s;
+    }
 </style>
