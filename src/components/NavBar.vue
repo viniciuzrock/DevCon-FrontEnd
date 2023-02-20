@@ -5,8 +5,16 @@
         </div>
         <nav>
             <ul>
-                <li>Home</li>
-                <li>Tarefas</li>
+                <li>
+                    <router-link to="/home">
+                        Home
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/tasks">
+                        Tarefas
+                    </router-link>
+                </li>
                 <li>Comunidade</li>
                 <li>Configurações</li>
                 <li>Sobre nós</li>
@@ -95,7 +103,13 @@
         width: 40rem ;
     }
     .navbar-container li{
+        /* margin-bottom: 2%; */
         list-style-type:none;
+        text-align: center;
+    }
+
+    .navbar-container li:hover{
+        background-color: #fff;
     }
     .userLogout{
         display: flex;

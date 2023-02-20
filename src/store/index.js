@@ -13,6 +13,40 @@ export default createStore({
             userId: null,
         }
     },
+    actions:{
+        // login(commit, loginData){
+        //     return new Promise(resolve =>{
+        //          fetch("http://localhost:8080/auth/login",{
+        //             method: "POST",
+        //             headers:{
+        //                 "Content-type":"application/json"
+        //             },
+        //             body: loginData
+        //         }).then((resp) => resp.json()).then((data)=>{
+        //             let auth = false
+        //             this.request = true
+        //             if(data.error){
+        //                 this.msgData = data.error,
+        //                 this.classMessage = "error"
+        //                 this.request = false
+        //             } else {
+        //                 auth = true
+
+        //                 this.msgData = data.msg,
+        //                 this.classMessage = "success"
+        //                 this.$store.commit("authenticate",{
+        //                     token: data.token,
+        //                     userId: data.userId
+        //                 })
+        //             }
+        //         })
+        //     }).then((resp)=>{
+        //         console.log(resp);
+        //     }).catch((e)=>{
+        //         console.log(e);
+        //     })
+        // }
+    },
     mutations:{
         authenticate(state, data){
             state.authenticated = true,

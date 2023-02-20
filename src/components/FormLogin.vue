@@ -69,6 +69,7 @@ import SpinnerLoad from './SpinnerLoad.vue'
                 }
                 const jsonData = JSON.stringify(dataLogin)
 
+                // const a = await this.$store.dispatch("login", jsonData)
                 await fetch("http://localhost:8080/auth/login",{
                     method: "POST",
                     headers:{
