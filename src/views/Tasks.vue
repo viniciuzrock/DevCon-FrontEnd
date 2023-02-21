@@ -13,11 +13,9 @@
                     <button @click="openModal">
                         Nova tarefa
                     </button>
-                    <div id="back" v-if="modal" @closeModal="fecha()">
+                    <div id="back" v-if="modal" >
                         <div class="modal">
-                            Nova Tarefa
-                            <button @click="closeModal">Fechar</button><br>
-                            <ModalTask/>
+                            <ModalTask @fechaModal="fecha"/>
                         </div>
                     </div>
                 </div>
@@ -77,11 +75,9 @@
             openModal(){
                 this.modal = true
             },
-            closeModal(){
-                this.modal = false
-            },
             fecha(){
                 console.log('Bateu');
+                this.modal = false
             }
         }
     }
@@ -123,7 +119,6 @@
         z-index: 2;
     }
     .modal{
-        background-color: red;
         position: fixed;
         left: 50%;
         top: 50%;
