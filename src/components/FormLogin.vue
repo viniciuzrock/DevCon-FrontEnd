@@ -41,7 +41,7 @@
 <script>
     import Message from '../components/Message.vue'
     import SliderRegister from '../components/SliderRegister.vue'
-import SpinnerLoad from './SpinnerLoad.vue'
+    import SpinnerLoad from './SpinnerLoad.vue'
     export default {
         name:"login",
         components: {
@@ -221,7 +221,6 @@ import SpinnerLoad from './SpinnerLoad.vue'
         display: flex;
         align-items: center;
         justify-content: center;
-
         cursor: pointer;
         font-weight: 600;
         border: solid #162434;

@@ -14,6 +14,8 @@ export default createStore({
         }
     },
     actions:{
+        donetask(commit, data){
+        }
         // login(commit, loginData){
         //     return new Promise(resolve =>{
         //          fetch("http://localhost:8080/auth/login",{
