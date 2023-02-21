@@ -1,5 +1,5 @@
 <template>
-    <div class="bbb">
+    <div >
         <NavBar></NavBar>
         <!-- <H2>
             tarefas
@@ -9,6 +9,18 @@
         </div>
         <div v-else>
             <div v-if="tasks.length > 0">
+                <div class="novatarefa">
+                    <button @click="openModal">
+                        Nova tarefa
+                    </button>
+                    <div id="back" v-if="modal" @closeModal="fecha()">
+                        <div class="modal">
+                            Nova Tarefa
+                            <button @click="closeModal">Fechar</button><br>
+                            <ModalTask/>
+                        </div>
+                    </div>
+                </div>
                 <FormTasks :tasks="tasks"/>
             </div>
             <div v-else>
@@ -18,6 +30,7 @@
                 <button>
                     Criar tarefa
                 </button>
+
             </div>
         </div>
     </div>
@@ -25,15 +38,17 @@
 
   <script >
     import FormTasks from '../components/FormTasks.vue';
+    import ModalTask from '../components/ModalTask.vue';
     import NavBar from '../components/NavBar.vue';
     import SpinnerLoad from '../components/SpinnerLoad.vue';
     import SpinnerRotation from '../components/SpinnerRotation.vue';
     export default{
-      components: { NavBar, FormTasks, SpinnerLoad, SpinnerRotation },
+      components: { NavBar, FormTasks, SpinnerLoad, SpinnerRotation, ModalTask },
       data(){
             return{
                 tasks:[],
-                loadRequest: false
+                loadRequest: false,
+                modal:false
             }
         },
         created(){
@@ -54,10 +69,19 @@
                         this.tasks = data.tasks
                         this.loadRequest = false
 
-                    },2000)
+                    },1000)
                 }).catch((err)=>{
                     console.log(err);
                 })
+            },
+            openModal(){
+                this.modal = true
+            },
+            closeModal(){
+                this.modal = false
+            },
+            fecha(){
+                console.log('Bateu');
             }
         }
     }
@@ -66,7 +90,6 @@
   <style scoped>
     .load-container{
         position: absolute;
-        /* background-color: #69696969; */
         background-color: #162434;
         padding: 5px;
         border-radius: 10px;
@@ -76,6 +99,34 @@
         display: flex;
         justify-content: center;
         align-items: center;
-
+    }
+    .novatarefa{
+        position: absolute;
+        margin-top: 3px;
+        margin-left: 5px;
+        z-index: 13;
+    }
+    .novatarefa button{
+        padding: 7px;
+        border-radius: 5px;
+        border: none;
+        background-color: rgb(0, 167, 245);
+        /* z-index: 13; */
+    }
+    #back{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        top: 0;
+        left: 0;
+        z-index: 2;
+    }
+    .modal{
+        background-color: red;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
   </style>
