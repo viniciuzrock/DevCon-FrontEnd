@@ -11,6 +11,7 @@
             <div v-if="tasks.length > 0">
                 <div class="novatarefa">
                     <button @click="openModal">
+                        <ion-icon name="add-circle-outline"></ion-icon>
                         Nova tarefa
                     </button>
                     <div id="back" v-if="modal" >
@@ -107,7 +108,11 @@
         border-radius: 5px;
         border: none;
         background-color: rgb(0, 167, 245);
-        /* z-index: 13; */
+        width: 110px;
+        display: flex;
+        align-items: center;
+        justify-content:space-around;
+        cursor: pointer;
     }
     #back{
         position: fixed;

@@ -80,6 +80,8 @@
    .container{
         display: flex;
         padding: 5px;
+        display: flex;
+        flex-direction: column;
     }
     .cardTask{
         margin: 5px;

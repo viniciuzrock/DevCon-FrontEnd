@@ -26,7 +26,7 @@
             </h4>
             <div>
                 <button @click="logout($event)">
-                    Sair
+                    <ion-icon name="power-outline"></ion-icon>
                 </button>
             </div>
         </div>
@@ -108,8 +108,10 @@
         text-align: center;
     }
 
-    .navbar-container li:hover{
-        background-color: #fff;
+    .navbar-container li a{
+        /* background-color: #fff; */
+        text-decoration: none;
+        color: #fff
     }
     .userLogout{
         display: flex;
@@ -120,17 +122,23 @@
     }
     .userLogout button{
         padding: 5px;
-        background-color: red;
+        background-color: transparent;
+        /* background-color: red; */
         width: 50px;
-        border-radius: 10px;
+        /* border-radius: 10px; */
+        border: none;
         height: 40px;
         cursor: pointer;
         transition: .5s;
     }
-    .userLogout button:hover{
+    /* .userLogout button:hover{
         background-color: #fff;
         border: solid 3px red;
         color: red;
         transition: .5s;
+    } */
+    ion-icon{
+        color: red;
+        font-size: 34px;
     }
 </style>
